@@ -1,0 +1,33 @@
+<div class="league-table-card">
+  <h2 class="card-container-title">Βαθμολογία</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align: left">Team</th>
+          <th>P</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GD</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for team in standings %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td style="text-align: left">{{ team.name }}</td>
+          <td>{{ team.W + team.D + team.L }}</td>
+          <td>{{ team.W }}</td>
+          <td>{{ team.D }}</td>
+          <td>{{ team.L }}</td>
+          <td>{{ team.GD }}</td>
+          <td>{{ team.points }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

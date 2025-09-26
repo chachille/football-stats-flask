@@ -1,0 +1,116 @@
+/*
+ * General body styling (for context and dark theme)
+ */
+body {
+  font-family: "Open Sans", "Play", Arial, sans-serif;
+  font-size: 1.1rem;
+  background-color: #1e1e1e;
+  color: #e8e8e8;
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-start; */
+  padding-top: 20px;
+}
+
+/*
+ * The container for the entire menu
+ */
+.top-bar-menu {
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
+  /*background-color: #1c1c1e;*/
+  background-color: transparent;
+  padding: 2px;
+  border-radius: 50px; /* Creates the outer rounded container */
+  max-width: fit-content; /* Restricts the width to the content */
+  margin: 20px auto; /* Centers the menu horizontally and adds vertical space */
+}
+
+/*
+ * Styling for each menu button
+ */
+.top-bar-menu a {
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #e8e8e8;
+  background-color: #333438;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+/*
+ * Styling for the active (selected) button
+ */
+.top-bar-menu a.active {
+  background-color: #3f3f42; /* A slightly different shade for the background */
+  border: 1px solid #a2cada; /* The white border */
+  padding: 8px 18px; /* Adjusted padding to compensate for the border */
+}
+
+/*
+ * Optional: A slight effect when you hover over a button
+ */
+.top-bar-menu a:not(.active):hover {
+  background-color: #4c4c4e;
+}
+
+/*
+ * The main content pane, which should be below the menu
+ */
+#content-pane {
+  display: flex; /* Keep this as flex to handle the two main cards */
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px; /* Aligns the content pane with the main content */
+  margin: 0 auto; /* Centers the content pane */
+}
+
+/*
+ * The Tournament selection combo-box
+ */
+
+#tournament-select,
+#team-select {
+  padding: 0px 20px;
+  border: none;
+  text-decoration: none;
+  color: #e8e8e8;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: "Play";
+}
+
+.win-icon {
+  color: #28a745; /* green */
+}
+.draw-icon {
+  color: #ffc107; /* yellow */
+}
+.loss-icon {
+  color: #dc3545; /* red */
+}
+
+.match-legend {
+  margin: 1em 0;
+  font-size: 0.75em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  align-items: center;
+}
+
+.match-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.match-legend i {
+  font-size: 1.2em;
+}

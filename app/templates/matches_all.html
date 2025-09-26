@@ -1,0 +1,7 @@
+{%if team %}
+    {% include "_selected_team_matches.html" %}
+{% else %}
+<div class="matches-layout">
+    {% include "_matches_card_matchdays.html" %}
+</div>
+{% endif %}

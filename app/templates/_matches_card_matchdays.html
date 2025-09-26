@@ -1,0 +1,49 @@
+{% if matchdays | length > 0 %} {% for matchday in matchdays %}
+<div class="matches-container">
+  <h2 class="card-container-title">
+    Αγωνιστική {{ matchday.matchday_no }} από {{ matchdays | length }}
+    <span class="card-container-subtitle">
+      {{ matchday.tournament.name }} - {{ matchday.leg }}ος Γύρος
+    </span>
+  </h2>
+  <div class="matches-grid">
+    {% for match in matchday.matches %}
+
+    <!-- Filter by Selected Team -->
+    {% if (team_id and (match.home_team_id == team_id or match.away_team_id ==
+    team_id)) or (team_id is none)%}
+
+    <div class="match-card">
+      <div class="match-info">
+        <div class="team">
+          <span class="team-name">{{ match.home_team_name }}</span>
+          {% if match.status == MatchStatus.PLAYED %}
+          <span class="score">{{ match.home_score }}</span>
+          {% else %}
+          <span class="score">-</span>
+          {% endif %}
+        </div>
+        <div class="team">
+          <span class="team-name">{{ match.away_team_name }}</span>
+          {% if match.status == MatchStatus.PLAYED %}
+          <span class="score">{{ match.away_score }}</span>
+          {% else %}
+          <span class="score">-</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="status">
+        <!-- <span class="full-time">{{ match.status }}</span> -->
+        <span class="date">{{ match.datetime.strftime('%a, %b %d') }}</span>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End Filter -->
+    {% endfor %}
+  </div>
+</div>
+{% endfor %} {%else%}
+<div class="matches-container">
+  <p class="no-entries">Δεν υπάρχουν αγωνιστικές για τη διοργάνωση</p>
+</div>
+{%endif%}

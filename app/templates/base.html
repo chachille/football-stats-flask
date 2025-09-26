@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academy Stats Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com" />-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700?family=Comfortaa:wght@300..700&display=swap"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+          rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+  </head>
+  <body>
+    <div class="top-bar-menu">
+      <select id="tournament-select" style="font-family: 'Open Sans',
+      'Play', Arial, sans-serif;">
+        <option value="all">Όλες οι διοργανώσεις</option>
+        {% for tournament in tournaments %}
+        <option value="{{ tournament.tournament_id }}">
+          {{ tournament.name }}
+        </option>
+        {% endfor %}
+      </select>
+
+      <select id="team-select" style="font-family: 'Open Sans',
+      'Play', Arial, sans-serif;">
+        <option value="all">Όλες οι ομάδες</option>
+        {% for team in teams %}
+        <option value="{{ team.team_id }}">{{ team.name }}</option>
+        {% endfor %}
+      </select>
+
+      <a href="#" data-page="overview" class="menu-link active">Overview</a>
+      <a href="#" data-page="matches" class="menu-link">Matches</a>
+      <a href="#" data-page="table" class="menu-link">Table</a>
+      <a href="#" data-page="management" class="menu-link">Management</a>
+    </div>
+
+    <!-- Main Content Pane -->
+    <main id="main-content-pane"></main>
+
+    <!-- <main>{% block content %}{% endblock %}</main> -->
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<div class="league-table-card">
+    <h2 class="card-container-title">Αγώνες {{ team.name }}</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Διοργάνωση</th>
+                <th style="text-align: center">Αγωνιστική</th>
+                <th style="text-align: center">Ημερομηνία</th>
+                <th style="text-align: left">Αντίπαλος</th>
+                <th style="text-align: center">Έδρα</th>
+                <th style="text-align: center">Αποτέλεσμα</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%  set ns = namespace(old_leg = matches[0].matchday.leg) %}
+            {% for match in matches %}
+                {% if match.home_team_id == team.team_id or match.away_team_id == team.team_id %}
+                    {% if match.home_team_id == team.team_id %}   {# If HOME game #}
+                        {% set opponent = match.away_team_name %} {# Set Opponent = Visitor #}
+                        {% set ground = "Εντός" %}                {# Set Ground = Home #}
+                    {%else %}
+                        {% set opponent = match.home_team_name %}
+                        {% set ground = "Εκτός" %}
+                    {% endif %}
+
+                    {%  if match.datetime is not none %}
+                        {%  set match_date = match.datetime_str %}
+                    {% else %}
+                        {% set match_date = match.matchday.date_options_str %}
+                    {% endif %}
+                    {% if match.matchday.leg == ns.old_leg %}
+                        <tr>
+                    {% else %}
+                        <tr style="border-top: 2px solid #fff;margin-top: 10px">
+                    {% endif %}
+
+                        <td>{{ match.matchday.tournament.name }}</td>
+                        <td style="text-align: center">{{ match.matchday.matchday_no }}</td>
+                        <td style="text-align: center">{{ match_date }}</td>
+                        <td style="text-align: left">{{ opponent }}</td>
+                        <td style="text-align: center">{{ ground }}</td>
+                        <td style="text-align: center">
+                            <span>{{ match.result_score(team.team_id) }}</span>
+                            <span>{{ match.result_icon(team.team_id) | safe }}</span>
+                        </td>
+                    </tr>
+                {%  endif %}
+                {% set ns.old_leg = match.matchday.leg %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="match-legend">
+      <strong>Υπόμνημα:</strong>
+      <span><i class="fas fa-check-circle win-icon"></i> Νίκη</span>
+      <span><i class="fas fa-minus-circle draw-icon"></i> Ισοπαλία</span>
+      <span><i class="fas fa-times-circle loss-icon"></i> Ήττα</span>
+      <span><i class="fa-solid fa-xmark canceled-icon"></i> Ακυρώθηκε</span>
+      <span><i class="fa-solid fa-clock postponed-icon"></i> Αναβλήθηκε</span>
+      <span><i class="fa-solid fa-calendar scheduled-icon"></i> Προγραμματισμένο</span>
+    </div>
+</div>

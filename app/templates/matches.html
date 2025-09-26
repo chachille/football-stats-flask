@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matches</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@8..144,100..1000&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gidole&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main-layout">
+      <div class="matches-container">
+        <h2 class="card-container-title">
+          Αγώνες
+          <span style="font-size: 0.8rem; color: #b0b0b0; padding-left: 5px"
+            >(Αγωνιστική {{ matchday_no }})</span
+          >
+        </h2>
+        <div class="matches-grid">
+          {% for match in matches %}
+          <div class="match-card">
+            <div class="match-info">
+              <div class="team">
+                <span class="team-name">{{ match.home_team_name }}</span>
+                <span class="score">{{ match.home_score }}</span>
+              </div>
+              <div class="team">
+                <span class="team-name">{{ match.away_team_name }}</span>
+                <span class="score">{{ match.away_score }}</span>
+              </div>
+            </div>
+            <div class="status">
+              <!-- <span class="full-time">{{ match.status }}</span> -->
+              <span class="date"
+                >{{ match.datetime.strftime('%a, %b %d') }}</span
+              >
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="league-table-card">
+        <h2 class="card-container-title">League Table</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ομάδα</th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Pts</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for team in standings %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ team.name }}</td>
+                <td>{{ team.W + team.D + team.L }}</td>
+                <td>{{ team.W }}</td>
+                <td>{{ team.D }}</td>
+                <td>{{ team.L }}</td>
+                <td>{{ team.GF }}</td>
+                <td>{{ team.GA }}</td>
+                <td>{{ team.GD }}</td>
+                <td>{{ team.points }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

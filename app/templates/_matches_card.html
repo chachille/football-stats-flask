@@ -1,0 +1,35 @@
+<div class="matches-container">
+  <h2 class="card-container-title">Αγώνες</h2>
+  <div class="matches-grid">
+    {% for match in matches %}
+    <!-- <span style="font-size: 0.9rem; color: #b0b0b0; padding-left: 5px"
+      >(Αγωνιστική {{ match.matchday.matchday_no }} από {{ matchdays_count
+      }})</span
+    > -->
+    <div class="match-card">
+      <div class="match-info">
+        <div class="team">
+          <span class="team-name">{{ match.home_team_name }}</span>
+          {% if match.status == MatchStatus.PLAYED %}
+          <span class="score">{{ match.home_score }}</span>
+          {% else %}
+          <span class="score">-</span>
+          {% endif %}
+        </div>
+        <div class="team">
+          <span class="team-name">{{ match.away_team_name }}</span>
+          {% if match.status == MatchStatus.PLAYED %}
+          <span class="score">{{ match.away_score }}</span>
+          {% else %}
+          <span class="score">-</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="status">
+        <!-- <span class="full-time">{{ match.status }}</span> -->
+        <span class="date">{{ match.datetime.strftime('%a, %b %d') }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
